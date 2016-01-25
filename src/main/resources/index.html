@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>reversi</title>
+<meta charset="utf-8"/>
+<!--
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+-->
+<link rel="stylesheet" href="app.css"/>
+</head><body>
+<script src="d.js"></script>
+<script src="board.js"></script>
+<script src="computer.js"></script>
+<script src="option.js"></script>
+<script src="app.js"></script>
+<!--
+<div style="position:absolute">
+	<div class="test10">size 10</div>
+	<div class="test25">size 25</div>
+	<div class="test50">size 50</div>
+	<div class="test100">size 100</div>
+</div>
+-->
+<h1>Reversi</h1>
+
+	<table class="centerGame">
+	<script>
+	board.doTable();</script>
+	</table>
+	<div id="message" class="centerGame"></div>
+	<div class="btnbar">
+		<input type="button" class="btn" name="restart" value="Start"/>
+		<input type="button" class="btn" name="options" value="Options"/>
+	</div>
+	<div id="gameover"></div>
+<script>
+pageLoaded();</script>
+</body></html>

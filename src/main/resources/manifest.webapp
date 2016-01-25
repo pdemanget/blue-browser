@@ -1,0 +1,16 @@
+{
+  "name": "Reversi",
+  "description": "Reversi game",
+  "launch_path": "/index.html",
+  "version": "1.0.1",
+  "icons": {
+	"60": "/img/icon60.png",
+    "256": "/img/icon256.png",
+    "128": "/img/icon128.png"
+  },
+  "developer": {
+    "name": "Philippe Demanget",
+    "url": "https://github.com/pdemanget/reversi"
+  },
+  "default_locale": "en"
+}
