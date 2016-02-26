@@ -7,21 +7,64 @@
 	<name>Simple browser in java with latest webkit of jdk</name>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.build.sourceDirectory}</directory>
+				<includes>
+					<include>**/*.fxml</include>
+				</includes>
+			</resource>
+		</resources>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>fil.Web</mainClass>
+							<addClasspath>true</addClasspath>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<classpathPrefix>lib</classpathPrefix>
+							<useUniqueVersions>false</useUniqueVersions>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>conf/</Class-Path>
+						</manifestEntries>
+						<manifestFile />
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
-			<!-- Theme Windows 7 -->
+		<!-- Theme Windows 7 -->
 		<dependency>
 			<groupId>org.aerofx</groupId>
 			<artifactId>aerofx</artifactId>
@@ -34,11 +77,11 @@
 			<artifactId>afterburner.fx</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-		<!--  Support du SVG -->
-		 <dependency>
-	        <groupId>de.codecentric.centerdevice</groupId>
-	        <artifactId>javafxsvg</artifactId>
-	        <version>1.1.0</version>
-	    </dependency>
+		<!-- Support du SVG -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>de.codecentric.centerdevice</groupId> -->
+<!-- 			<artifactId>javafxsvg</artifactId> -->
+<!-- 			<version>1.1.0</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 </project>

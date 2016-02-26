@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import com.airhacks.afterburner.injection.Injector;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,7 +33,17 @@ import netscape.javascript.JSObject;
  * 
  * -Dhttp.proxyHost=10.0.0.100 -Dhttp.proxyPort=8800 -Dhttp.nonProxyHosts="localhost|127.0.0.1|10.*.*.*|*.foo.com|etc"
  * 
- * TODO: back/next button, tabs, menus, customisation.
+ * TODO: 
+ *  Actions non fournies par webkit:
+ *   base:
+ * - back/next button bind sur alt<- alt->
+ * - refresh bind sur F5
+ * - bookmark bind sur ^D
+ * - menu des bookmarks
+ *   utile: 
+ * - tabs  : ^T
+ * - menus : Classement bookmarks, Histo arborescent, Parametres 
+ * - customisation : gestion de plugin avec une API sur le chargement, l'histo le contenu (filtrage..)
  * 
  * @author pdemanget
  *
@@ -129,8 +137,8 @@ public class Web extends Application {
 	}
 	
 	public void start(Stage stage) throws IOException{
-    Injector.registerExistingAndInject (this);
-    Injector.setModelOrService(this.getClass (),this);
+//    Injector.registerExistingAndInject (this);
+//    Injector.setModelOrService(this.getClass (),this);
 	  stage.setTitle ("Blue browser");
     
     stage.getIcons().add(new Image(LOGO));
