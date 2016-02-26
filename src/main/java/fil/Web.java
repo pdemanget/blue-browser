@@ -1,18 +1,26 @@
 package fil;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
+import com.airhacks.afterburner.injection.Injector;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
-
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
@@ -23,16 +31,24 @@ import netscape.javascript.JSObject;
 /**
  * http://stackoverflow.com/questions/17522343/custom-javafx-webview-protocol-handler
  * http://stackoverflow.com/questions/16215844/javafx-webview-disable-same-origin-policy-allow-cross-domain-requests
+ * 
+ * 
+ * -Dhttp.proxyHost=10.0.0.100 -Dhttp.proxyPort=8800 -Dhttp.nonProxyHosts="localhost|127.0.0.1|10.*.*.*|*.foo.com|etc"
+ * 
+ * TODO: back/next button, tabs, menus, customisation.
+ * 
  * @author pdemanget
  *
  */
 @SuppressWarnings("restriction")
-public class Wbe extends Application {
+public class Web extends Application {
 
-	private static final String INDEX = "myapp://resource/index.html";
+	private static final String INDEX = "http://www.google.com";
+	private static final String INDEX2 = "myapp://resource/index.html";
+  private static final String LOGO = "/style/logo.png";
+  private ResourceBundle bundle = ResourceBundle.getBundle ("i18n/app", Locale.getDefault ());
 
-	@Override
-	public void start(Stage stage) {
+	public void start1(Stage stage) {
 		URL.setURLStreamHandlerFactory(new MyURLStreamHandlerFactory());
 		stage.setTitle("HTML");
 		//stage.setFullScreen(true);
@@ -50,11 +66,11 @@ public class Wbe extends Application {
 			stage.setMaximized(true);	
 		}
 		
-		final WebView browser = new WebView();
-		browser.setPrefHeight(1600);
+		final WebView webView = new WebView();
+		webView.setPrefHeight(1600);
 
 		@SuppressWarnings("restriction")
-		final WebEngine webEngine = browser.getEngine();
+		final WebEngine webEngine = webView.getEngine();
 		Hyperlink hpl = new Hyperlink("www.google.com");
 		hpl.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -62,17 +78,28 @@ public class Wbe extends Application {
 				webEngine.load("http://www.google.com");
 			}
 		});
-
+		
 		MenuButton menuButton = new MenuButton("go", null,getMenuItem(webEngine,"google","www.google.com")
 				,getMenuItem(webEngine,"local","http://localhost:8001"));
 		menuButton.setOnAction((e)->{webEngine.load("http://www.google.com");});
 		
 		TextField text = new TextField();
 		text.textProperty().addListener((obs,old,value)->{
-			System.out.println(value);
-			webEngine.load(value);
+//			System.out.println(value);
+//			webEngine.load(value);
 		});
-		root.getChildren().addAll( menuButton, text, browser);
+		Button button = new Button("go");
+		button.setOnAction((e)->{
+		  webEngine.load(text.getText());
+		  System.out.println(text.getText());
+		});
+		
+		HBox hbox = new HBox(menuButton, text, button);
+		
+		webView.getEngine().locationProperty().addListener((obs,old,value) ->{
+		  text.setText(value);
+		});
+		root.getChildren().addAll(hbox, webView);
 		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
 		//webEngine.load("http://localhost:8001/index.html");
 		//webEngine.loadContent("<html><head><title>IWH</title></head><body><h1>test</h1><script>alert('toto');</script></body></html>");
@@ -100,4 +127,25 @@ public class Wbe extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	public void start(Stage stage) throws IOException{
+    Injector.registerExistingAndInject (this);
+    Injector.setModelOrService(this.getClass (),this);
+	  stage.setTitle ("Blue browser");
+    
+    stage.getIcons().add(new Image(LOGO));
+    Parent root = FXMLLoader.load(getClass().getResource("App.fxml"),bundle);
+    Scene scene = new Scene(root);
+    stage.setMaximized(true);
+    stage.setScene(scene);
+    stage.show ();
+
+    
+    
+	}
+	
+	 @Override
+	  public void stop () {
+	   System.out.println("exiting");
+	 }
 }

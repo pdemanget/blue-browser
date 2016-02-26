@@ -19,4 +19,26 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<dependencies>
+			<!-- Theme Windows 7 -->
+		<dependency>
+			<groupId>org.aerofx</groupId>
+			<artifactId>aerofx</artifactId>
+			<version>0.2</version>
+		</dependency>
+
+		<!-- Ajout des possibilités @Inject -->
+		<dependency>
+			<groupId>com.airhacks</groupId>
+			<artifactId>afterburner.fx</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<!--  Support du SVG -->
+		 <dependency>
+	        <groupId>de.codecentric.centerdevice</groupId>
+	        <artifactId>javafxsvg</artifactId>
+	        <version>1.1.0</version>
+	    </dependency>
+	</dependencies>
 </project>
