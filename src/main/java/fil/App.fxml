@@ -8,8 +8,10 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="fil.App">
 	<HBox >
-		<TextField fx:id="text" prefWidth="1600" onAction="#go"></TextField>
-		<Button onAction="#go">Go</Button>
+		<Button onAction="#back">&lt;</Button>
+		<Button onAction="#next">&gt;</Button>
+		<TextField fx:id="text" prefWidth="1400" onAction="#go"></TextField>
+		<Button onAction="#go">=</Button>
 	</HBox>
 	<WebView fx:id="webView" prefHeight="1600"></WebView>
 </VBox>
