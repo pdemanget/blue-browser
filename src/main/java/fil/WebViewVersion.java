@@ -1,6 +1,5 @@
 package fil;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 

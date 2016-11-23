@@ -16,3 +16,20 @@ Using customPage (desktopViewer)
 --
 
 URL.setURLStreamHandlerFactory(new MyURLStreamHandlerFactory());
+
+
+Execute JS from Java
+--
+		JSObject window = (JSObject) webEngine.executeScript("window");
+
+Execute Java from JS
+--
+
+
+Redirect protocol to custom generation
+---
+The secret behind resource and local file usage instead of remote files :
+
+		URL.setURLStreamHandlerFactory(new MyURLStreamHandlerFactory());
+
+With a custom implementation of MyURLStreamHandlerFactory which extends URLStreamHandler

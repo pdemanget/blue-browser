@@ -1,9 +1,11 @@
 package fil;
-import java.io.*;
-import java.net.SocketTimeoutException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
 
 /**
  * Register a protocol handler for URLs like this: <code>myapp:///pics/sland.gif</code><br>
@@ -91,7 +93,7 @@ public class MyURLConnection extends URLConnection
         }
         return nread;
     }
-    
+
     private void loadImage() throws IOException
     {
         if (data != null)
@@ -99,16 +101,16 @@ public class MyURLConnection extends URLConnection
             return;
         }
 
-            int timeout = this.getConnectTimeout();
-            long start = System.currentTimeMillis();
-            URL url = getURL();
+//            int timeout = this.getConnectTimeout();
+//            long start = System.currentTimeMillis();
+//            URL url = getURL();
 
 //            String imgPath = url.toExternalForm();
 //            imgPath = imgPath.startsWith("myapp://") ? imgPath.substring("myapp://".length()) : imgPath.substring("myapp:".length()); // attention: triple '/' is reduced to a single '/'
             String fileName = getURL().getFile();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             copy(this.getClass().getResourceAsStream(fileName),byteArrayOutputStream);
-           data = byteArrayOutputStream.toByteArray(); 
+           data = byteArrayOutputStream.toByteArray();
             // this is my own asynchronous image implementation
             // instead of this part (including the following loop) you could do your own (synchronous) loading logic
 //            MyImage img = MyApp.getImage(imgPath);

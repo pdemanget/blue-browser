@@ -25,6 +25,8 @@ public class App {
 
   public App(){
     System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+    //TODO
+    //java.net.CookieHandler.setDefault(new com.sun.webkit.network.CookieManager());
   }
 
 
