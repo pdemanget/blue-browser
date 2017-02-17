@@ -12,7 +12,12 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * Gère la couche URLStreamHandlerFactory -> URLStreamHandler -> URLConnection
+ * Gère la couche URLStreamHandlerFactory -> URLStreamHandler -> URLConnection.
+ *
+ * Permet de rajouter plusieurs handler sur les stream handler, et de gérer un handler "Simple" basé sunr fonction pour les resources texte.
+ *
+ * Usage:
+ *
  */
 public class StringURLHandlerFactory implements URLStreamHandlerFactory {
 
