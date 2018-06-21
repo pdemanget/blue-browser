@@ -1,3 +1,4 @@
+
 blue browser
 ====
 
@@ -24,12 +25,3 @@ Execute JS from Java
 
 Execute Java from JS
 --
-
-
-Redirect protocol to custom generation
----
-The secret behind resource and local file usage instead of remote files :
-
-		URL.setURLStreamHandlerFactory(new MyURLStreamHandlerFactory());
-
-With a custom implementation of MyURLStreamHandlerFactory which extends URLStreamHandler
