@@ -101,36 +101,10 @@ public class MyURLConnection extends URLConnection
             return;
         }
 
-//            int timeout = this.getConnectTimeout();
-//            long start = System.currentTimeMillis();
-//            URL url = getURL();
-
-//            String imgPath = url.toExternalForm();
-//            imgPath = imgPath.startsWith("myapp://") ? imgPath.substring("myapp://".length()) : imgPath.substring("myapp:".length()); // attention: triple '/' is reduced to a single '/'
             String fileName = getURL().getFile();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             copy(this.getClass().getResourceAsStream(fileName),byteArrayOutputStream);
            data = byteArrayOutputStream.toByteArray();
-            // this is my own asynchronous image implementation
-            // instead of this part (including the following loop) you could do your own (synchronous) loading logic
-//            MyImage img = MyApp.getImage(imgPath);
-//            do
-//            {
-//                if (img.isFailed())
-//                {
-//                    throw new IOException("Could not load image: " + getURL());
-//                }
-//                else if (!img.hasData())
-//                {
-//                    long now = System.currentTimeMillis();
-//                    if (now - start > timeout)
-//                    {
-//                        throw new SocketTimeoutException();
-//                    }
-//                    Thread.sleep(100);
-//                }
-//            } while (!img.hasData());
-//            data = img.getData();
 
     }
 
