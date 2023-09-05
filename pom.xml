@@ -6,6 +6,11 @@
 	<artifactId>blue-browser</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Simple browser in java with latest webkit of jdk</name>
+	
+	<properties>
+		<jfx.version>20.0.2</jfx.version>
+		<main.class>fil.Web</main.class>
+	</properties>
 
 	<build>
 		<resources>
@@ -67,10 +72,42 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.3</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
+		<!-- Migration java 20 -->
+		<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${jfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${jfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${jfx.version}</version>
+        </dependency>
 		<!-- Theme Windows 7 -->
 		<dependency>
 			<groupId>org.aerofx</groupId>
@@ -84,6 +121,11 @@
 			<artifactId>afterburner.fx</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+		<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${jfx.version}</version>
+        </dependency>
 		<!-- Support du SVG -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>de.codecentric.centerdevice</groupId> -->

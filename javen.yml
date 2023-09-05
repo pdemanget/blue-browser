@@ -1,0 +1,41 @@
+artifact: com.github.pdemanget:blue-browser:0.0.1-SNAPSHOT
+name: Simple browser in java with latest webkit of jdk
+include:
+ - java
+compile:
+- org.aerofx:aerofx:0.2
+- com.airhacks:afterburner.fx:1.6.2
+plugins:
+- groupId: org.apache.maven.plugins
+  artifactId: maven-compiler-plugin
+  configuration:
+    source: '1.8'
+    target: '1.8'
+- groupId: org.apache.maven.plugins
+  artifactId: maven-jar-plugin
+  configuration:
+    archive:
+      manifest:
+        mainClass: fil.Web
+        addClasspath: 'true'
+        addDefaultImplementationEntries: 'true'
+        addDefaultSpecificationEntries: 'true'
+        classpathPrefix: lib
+        useUniqueVersions: 'false'
+      manifestEntries:
+        Class-Path: conf/
+      manifestFile: ''
+- artifactId: maven-dependency-plugin
+  executions:
+    execution:
+      phase: install
+      goals:
+        goal: copy-dependencies
+      configuration:
+        outputDirectory: ${project.build.directory}/lib
+build:
+  resources:
+    resource:
+      directory: src/main/resources
+      includes:
+        include: '**/*.*'
