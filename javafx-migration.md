@@ -44,15 +44,22 @@ dependencies
 
 plugin
 ------
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.3</version>
-                <configuration>
-                    <mainClass>${main.class}</mainClass>
-                </configuration>
-            </plugin>
-
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.3</version>
+            <configuration>
+                <mainClass>${main.class}</mainClass>
+            </configuration>
+        </plugin>
+		
+module-file
+-----------
+file: src\main\java\module-info.java
+module pdem {
+    requires javafx.controls;
+    exports pdem;
+}
 
 your configuration
 -------------------
@@ -60,6 +67,15 @@ your configuration
 		<jfx.version>20.0.2</jfx.version>
 		<main.class>fil.Web</main.class>
 	</properties>
+
+deploying
+---------
+https://openjfx.io/openjfx-docs/#modular
+mvn clean javafx:jlink
+if you get "jlink require a module descriptor" => you need the module-file
+
+target/image/bin/java -m hellofx/org.openjfx.App
+target\image\bin\java -m pdem/pdem.App
    
    
 maven usage
